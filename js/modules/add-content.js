@@ -128,12 +128,7 @@ const AddContent = (() => {
     del.addEventListener('click', function (e) {
       e.stopPropagation();
       e.preventDefault();
-      const parent = item.parentNode;
       item.remove();
-      /* If it's a gallery item, replace with a new placeholder */
-      if (item.classList.contains('gallery-item') && parent) {
-        parent.appendChild(createGalleryPlaceholder());
-      }
     });
     item.appendChild(del);
   }
@@ -425,8 +420,8 @@ const AddContent = (() => {
     return overlay;
   }
 
-  /* ── Create a single gallery placeholder slot ── */
-  function createGalleryPlaceholder() {
+  /* ── Permanent gallery add button (stays in grid) ── */
+  function createGalleryAddBtn() {
     const el = document.createElement('div');
     el.className = 'gallery-add-placeholder admin-only';
     el.innerHTML = '<span class="add-icon">+</span><span class="add-text">Agregar foto</span>';
@@ -455,8 +450,9 @@ const AddContent = (() => {
             item.innerHTML = `
               <img src="${ev.target.result}" alt="${title}" loading="lazy">
               <div class="overlay"><span>${title}</span></div>`;
+            /* Insert new card before the permanent add button */
             const parent = el.parentNode;
-            if (parent) parent.replaceChild(item, el);
+            if (parent) parent.insertBefore(item, el);
             if (isAdmin()) { addDeleteBtn(item); addEditBtn(item); }
             requestAnimationFrame(() => item.classList.add('visible'));
             overlay.remove();
@@ -468,14 +464,11 @@ const AddContent = (() => {
     return el;
   }
 
-  /* ── Gallery: init multiple placeholder slots ── */
+  /* ── Gallery: init permanent add button ── */
   function initGalleryUpload(gridSelector) {
     const grid = document.querySelector(gridSelector || '.gallery-grid');
     if (!grid) return;
-    /* Add a few empty slots at the end */
-    for (let i = 0; i < 6; i++) {
-      grid.appendChild(createGalleryPlaceholder());
-    }
+    grid.appendChild(createGalleryAddBtn());
   }
 
   /* ── Extra content: add info card (with optional image) ── */
