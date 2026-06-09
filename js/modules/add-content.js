@@ -119,6 +119,7 @@ const AddContent = (() => {
 
   /* ── Delete button for items ── */
   function addDeleteBtn(item) {
+    if (item.classList.contains('gallery-add-placeholder')) return;
     if (item.querySelector('.delete-btn')) return;
     const del = document.createElement('button');
     del.className = 'delete-btn admin-only';
@@ -139,6 +140,7 @@ const AddContent = (() => {
 
   /* ── Edit button for items ── */
   function addEditBtn(item) {
+    if (item.classList.contains('gallery-add-placeholder')) return;
     if (item.querySelector('.edit-btn')) return;
     const edit = document.createElement('button');
     edit.className = 'edit-btn admin-only';
@@ -414,10 +416,14 @@ const AddContent = (() => {
     const grid = document.querySelector(gridSelector || '.gallery-grid');
     if (!grid) return;
 
-    const section = grid.closest('section') || grid.parentElement;
-    const btn = createAddBtn(section, 'Agregar imagen');
+    /* Placeholder inside the grid, styled as a gallery item (admin‑only) */
+    const placeholder = document.createElement('div');
+    placeholder.className = 'gallery-add-placeholder admin-only';
+    placeholder.innerHTML = '<span class="add-icon">+</span><span class="add-text">Agregar foto</span>';
+    grid.appendChild(placeholder);
 
-    btn.addEventListener('click', () => {
+    placeholder.addEventListener('click', function (e) {
+      e.stopPropagation();
       const overlay = showModal(`
         <h3 class="ac-title">Agregar imagen</h3>
         <form class="ac-form" id="acGalleryForm">
@@ -441,7 +447,7 @@ const AddContent = (() => {
             item.innerHTML = `
               <img src="${ev.target.result}" alt="${title}" loading="lazy">
               <div class="overlay"><span>${title}</span></div>`;
-            grid.appendChild(item);
+            grid.insertBefore(item, placeholder);
             if (isAdmin()) { addDeleteBtn(item); addEditBtn(item); }
             requestAnimationFrame(() => item.classList.add('visible'));
             overlay.remove();
