@@ -40,9 +40,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-size: 14px;
 }
 
-p { font-size: 0.95rem; line-height: 1.8; color: var(--gray); }
+p { line-height: 1.8; color: var(--gray); }
 
 /* ── Text Blend Utilities ── */
 .txt-gradient-blue-yellow {
