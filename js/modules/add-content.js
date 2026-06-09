@@ -409,43 +409,46 @@ const AddContent = (() => {
     return overlay;
   }
 
-  /* ── Gallery: upload photos ── */
+  /* ── Gallery: upload photos with custom title ── */
   function initGalleryUpload(gridSelector) {
     const grid = document.querySelector(gridSelector || '.gallery-grid');
     if (!grid) return;
 
     const section = grid.closest('section') || grid.parentElement;
-    const btn = createAddBtn(section, 'Agregar fotos');
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.multiple = true;
-    input.style.display = 'none';
-    section.appendChild(input);
+    const btn = createAddBtn(section, 'Agregar imagen');
 
-    btn.addEventListener('click', () => input.click());
+    btn.addEventListener('click', () => {
+      const overlay = showModal(`
+        <h3 class="ac-title">Agregar imagen</h3>
+        <form class="ac-form" id="acGalleryForm">
+          <label>Título <input type="text" name="title" placeholder="Nombre de la imagen" required></label>
+          <label>Imagen <input type="file" name="img" accept="image/*" required></label>
+          <button type="submit" class="btn btn-secondary">Agregar</button>
+        </form>`);
 
-    input.addEventListener('change', function () {
-      const files = Array.from(this.files);
-      files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = e => {
-          const item = document.createElement('div');
-          item.className = 'gallery-item';
-          const label = file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
-          item.innerHTML = `
-            <img src="${e.target.result}" alt="${label}" loading="lazy">
-            <div class="overlay"><span>${label}</span></div>`;
-          grid.appendChild(item);
+      const form = overlay.querySelector('#acGalleryForm');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const data = new FormData(this);
+        const title = data.get('title');
+        const imgFile = data.get('img');
 
-          // if admin is logged in, add delete + edit btns
-          if (isAdmin()) { addDeleteBtn(item); addEditBtn(item); }
-
-          requestAnimationFrame(() => item.classList.add('visible'));
-        };
-        reader.readAsDataURL(file);
+        if (imgFile && imgFile.size) {
+          const reader = new FileReader();
+          reader.onload = ev => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.innerHTML = `
+              <img src="${ev.target.result}" alt="${title}" loading="lazy">
+              <div class="overlay"><span>${title}</span></div>`;
+            grid.appendChild(item);
+            if (isAdmin()) { addDeleteBtn(item); addEditBtn(item); }
+            requestAnimationFrame(() => item.classList.add('visible'));
+            overlay.remove();
+          };
+          reader.readAsDataURL(imgFile);
+        }
       });
-      this.value = '';
     });
   }
 
