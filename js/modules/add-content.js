@@ -173,7 +173,10 @@ const AddContent = (() => {
     if (cls.includes('gallery-item')) {
       const img = card.querySelector('img');
       const span = card.querySelector('.overlay span');
-      fields = [{ name: 'title', type: 'text', label: 'Título' }];
+      fields = [
+        { name: 'title', type: 'text', label: 'Título' },
+        { name: 'img', type: 'file', label: 'Cambiar imagen (opcional)' }
+      ];
       values.title = span ? span.textContent : (img ? img.alt : '');
     }
     // extra card
@@ -321,8 +324,14 @@ const AddContent = (() => {
       if (cls.includes('gallery-item')) {
         const img = card.querySelector('img');
         const span = card.querySelector('.overlay span');
+        const imgFile = data.img;
         if (span) span.textContent = data.title || span.textContent;
         if (img) img.alt = data.title || img.alt;
+        if (imgFile && imgFile.size) {
+          const reader = new FileReader();
+          reader.onload = ev => { if (img) img.src = ev.target.result; };
+          reader.readAsDataURL(imgFile);
+        }
       } else if (cls.includes('extra-card')) {
         const catEl = card.querySelector('.ec-cat');
         const titleEl = card.querySelector('h4');
