@@ -504,8 +504,8 @@ section { padding: 5rem 3rem; position: relative; }
 }
 
 .hero p {
-  font-size: 1rem; color: #fff;
-  -webkit-text-fill-color: #fff;
+  font-size: 1rem; color: #ff3333;
+  -webkit-text-fill-color: #ff3333;
   background: none;
   max-width: 520px; margin: 1.2rem 0 2.5rem;
   line-height: 1.8;
