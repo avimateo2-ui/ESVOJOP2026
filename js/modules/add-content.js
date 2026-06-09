@@ -9,13 +9,19 @@ const AddContent = (() => {
   const ADMIN_USER = 'esvojop';
   const ADMIN_PASS = 'esvojop2026';
 
-  /* ── Admin state (no persistence — always require login) ── */
-  let _admin = false;
+  /* ── Admin state (persistent via sessionStorage) ── */
+  const STORAGE_KEY = 'esvojop_admin';
+  let _admin = sessionStorage.getItem(STORAGE_KEY) === 'true';
 
   function isAdmin() { return _admin; }
 
   function setAdmin(state) {
     _admin = state;
+    if (state) {
+      sessionStorage.setItem(STORAGE_KEY, 'true');
+    } else {
+      sessionStorage.removeItem(STORAGE_KEY);
+    }
     document.body.classList.toggle('admin-mode', state);
     const toggle = document.querySelector('.admin-toggle');
     if (toggle) toggle.textContent = state ? '🔓' : '🔒';
@@ -352,6 +358,23 @@ const AddContent = (() => {
 
   /* ── Init ── */
   function init() {
+    if (isAdmin()) {
+      document.body.classList.add('admin-mode');
+      applyDeleteButtons('.gallery-item');
+      applyDeleteButtons('.extra-card');
+      applyDeleteButtons('.prog-item');
+      applyDeleteButtons('.bene-item');
+      applyDeleteButtons('.met-item');
+      applyDeleteButtons('.com-card');
+      applyDeleteButtons('.level-card');
+      applyDeleteButtons('.phil-card');
+      applyDeleteButtons('.val-item');
+      applyDeleteButtons('.pos-card');
+      applyDeleteButtons('.cert-card');
+      applyDeleteButtons('.contact-card');
+      applyDeleteButtons('.step-card');
+      applyDeleteButtons('.loc-card');
+    }
     initAdminToggle();
   }
 
