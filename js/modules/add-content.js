@@ -39,8 +39,8 @@ const AddContent = (() => {
         <button class="ac-modal-close">&times;</button>
         <h3 class="ac-title">Acceso Administrador</h3>
         <form class="ac-form" id="adminLoginForm">
-          <label>Usuario <input type="text" name="username" required autofocus></label>
-          <label>Contraseña <input type="password" name="password" required></label>
+          <label>Usuario <input type="text" name="username" value="esvojop" readonly></label>
+          <label>Contraseña <input type="password" name="password" required autofocus></label>
           <button type="submit" class="btn btn-secondary">Ingresar</button>
         </form>
       </div>`;
