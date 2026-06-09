@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.disabled = true;
     btn.textContent = 'Enviando...';
     try {
-      const res = await fetch('https://formsubmit.co/ajax/jorpeflo@gmail.com', {
+      const res = await fetch('https://formsubmit.co/ajax/avimateo2@gmail.com', {
         method: 'POST',
         body: new FormData(this)
       });
