@@ -416,14 +416,15 @@ const AddContent = (() => {
     const grid = document.querySelector(gridSelector || '.gallery-grid');
     if (!grid) return;
 
-    /* Placeholder inside the grid, styled as a gallery item (admin‑only) */
+    /* Placeholder inside the grid (visible to all, functional only for admin) */
     const placeholder = document.createElement('div');
-    placeholder.className = 'gallery-add-placeholder admin-only';
+    placeholder.className = 'gallery-add-placeholder';
     placeholder.innerHTML = '<span class="add-icon">+</span><span class="add-text">Agregar foto</span>';
     grid.appendChild(placeholder);
 
     placeholder.addEventListener('click', function (e) {
       e.stopPropagation();
+      if (!isAdmin()) { showToast('Solo el administrador puede agregar contenido'); return; }
       const overlay = showModal(`
         <h3 class="ac-title">Agregar imagen</h3>
         <form class="ac-form" id="acGalleryForm">
