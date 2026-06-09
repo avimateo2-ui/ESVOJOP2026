@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda · ESVOJOP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<nav>
+  <div class="logo">VOLEI<span>BOL</span></div>
+  <button class="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+    <li><a href="galeria.html">Galería</a></li>
+    <li><a href="contenido-extra.html">Contenido Extra</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="bg-lines"></div>
+    <div class="page-tag reveal"><span class="txt">Equípate</span></div>
+    <h1 class="page-title reveal"><span>Tienda</span></h1>
+    <p class="page-desc reveal">Todo lo que necesitas para jugar voleibol al más alto nivel. Calidad y precio justo.</p>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="shop-header reveal">
+        <div class="shop-filters">
+          <button class="filter-btn active" data-filter="all">Todo</button>
+          <button class="filter-btn" data-filter="calzado">Calzado</button>
+          <button class="filter-btn" data-filter="ropa">Ropa</button>
+          <button class="filter-btn" data-filter="balones">Balones</button>
+          <button class="filter-btn" data-filter="accesorios">Accesorios</button>
+        </div>
+      </div>
+
+      <div class="product-grid">
+        <!-- Calzado -->
+        <div class="card product-card reveal" data-category="calzado">
+          <div class="img-wrap">
+            <span>👟</span>
+            <span class="badge">Nuevo</span>
+          </div>
+          <div class="info">
+            <h4>Zapatillas Pro Jump Elite</h4>
+            <div class="category">Calzado</div>
+            <div class="price">$2,499</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+
+        <div class="card product-card reveal" data-category="calzado">
+          <div class="img-wrap"><span>👟</span></div>
+          <div class="info">
+            <h4>Zapatillas Spike Master 3000</h4>
+            <div class="category">Calzado</div>
+            <div class="price"><span class="old">$2,999</span> $2,199</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+
+        <!-- Ropa -->
+        <div class="card product-card reveal" data-category="ropa">
+          <div class="img-wrap"><span>👕</span></div>
+          <div class="info">
+            <h4>Camiseta Titular Pro</h4>
+            <div class="category">Ropa</div>
+            <div class="price">$599</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+
+        <div class="card product-card reveal" data-category="ropa">
+          <div class="img-wrap"><span>🩳</span></div>
+          <div class="info">
+            <h4>Short de Competición</h4>
+            <div class="category">Ropa</div>
+            <div class="price">$449</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+
+        <div class="card product-card reveal" data-category="ropa">
+          <div class="img-wrap"><span>🧦</span></div>
+          <div class="info">
+            <h4>Pack 3 Pares Calcetines</h4>
+            <div class="category">Ropa</div>
+            <div class="price">$299</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+
+        <!-- Balones -->
+        <div class="card product-card reveal" data-category="balones">
+          <div class="img-wrap">
+            <span>🏐</span>
+            <span class="badge">Más vendido</span>
+          </div>
+          <div class="info">
+            <h4>Balón Oficial FIVB Pro</h4>
+            <div class="category">Balones</div>
+            <div class="price">$1,299</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+
+        <div class="card product-card reveal" data-category="balones">
+          <div class="img-wrap"><span>🏐</span></div>
+          <div class="info">
+            <h4>Balón Entrenamiento Plus</h4>
+            <div class="category">Balones</div>
+            <div class="price">$699</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+
+        <div class="card product-card reveal" data-category="balones">
+          <div class="img-wrap"><span>🌊</span></div>
+          <div class="info">
+            <h4>Balón Vóley Playa</h4>
+            <div class="category">Balones</div>
+            <div class="price">$799</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+
+        <!-- Accesorios -->
+        <div class="card product-card reveal" data-category="accesorios">
+          <div class="img-wrap"><span>🦵</span></div>
+          <div class="info">
+            <h4>Rodilleras Pro Shield</h4>
+            <div class="category">Accesorios</div>
+            <div class="price">$349</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+
+        <div class="card product-card reveal" data-category="accesorios">
+          <div class="img-wrap"><span>🖐️</span></div>
+          <div class="info">
+            <h4>Muñequeras Antisudor</h4>
+            <div class="category">Accesorios</div>
+            <div class="price">$129</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+
+        <div class="card product-card reveal" data-category="accesorios">
+          <div class="img-wrap"><span>🧴</span></div>
+          <div class="info">
+            <h4>Resina para manos 200g</h4>
+            <div class="category">Accesorios</div>
+            <div class="price">$179</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+
+        <div class="card product-card reveal" data-category="accesorios">
+          <div class="img-wrap"><span>🎒</span></div>
+          <div class="info">
+            <h4>Mochila Deportiva 40L</h4>
+            <div class="category">Accesorios</div>
+            <div class="price">$899</div>
+            <button class="btn btn-secondary btn-sm add-to-cart" style="margin-top:0.75rem">Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 ESVOJOP · Club de Voleibol &mdash; Formación deportiva de alto nivel</p>
+  <div class="social">
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+    <a href="#">TikTok</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto · ESVOJOP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<nav>
+  <div class="logo">VOLEI<span>BOL</span></div>
+  <button class="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+    <li><a href="galeria.html">Galería</a></li>
+    <li><a href="contenido-extra.html">Contenido Extra</a></li>
+    <li><a href="contacto.html" class="active">Contacto</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-header" style="background:url('img/fotos/imagines/WhatsApp%20Image%202026-04-10%20at%206.04.24%20PM.jpeg') center/cover no-repeat;text-align:left;padding-bottom:6rem;">
+    <div class="page-header-overlay"></div>
+    <div class="bg-lines"></div>
+    <div style="position:relative;z-index:2;display:inline-block;padding:2.5rem 3rem;border:1px solid rgba(255,215,0,0.08);border-radius:2px;max-width:650px;background:rgba(6,13,26,0.3);backdrop-filter:blur(4px);">
+      <div class="page-tag reveal" style="margin-left:0;border-color:var(--yellow);"><span class="txt">Contáctanos</span></div>
+      <h1 class="page-title reveal" style="text-align:left;font-size:clamp(3.5rem,7vw,6rem);"><span>Contacto</span></h1>
+      <p class="page-desc reveal" style="text-align:left;margin-left:0;max-width:500px;font-size:1.1rem;color:#e8e4db;-webkit-text-fill-color:#e8e4db;background:none;text-shadow:0 2px 12px rgba(0,0,0,0.6);">Forma parte de ESVOJOP. Entrena, compite y crece con nosotros.</p>
+    </div>
+  </div>
+
+  <!-- Contacto directo -->
+  <section>
+    <div class="container">
+      <div class="contact-grid">
+        <div class="reveal">
+          <form class="contact-form" id="contactForm" action="#" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" placeholder="Tu nombre" required>
+              </div>
+              <div class="form-group">
+                <label for="edad">Edad</label>
+                <input type="number" id="edad" placeholder="Tu edad" min="5" max="99">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" placeholder="tu@correo.com" required>
+              </div>
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" placeholder="300 000 0000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="asunto">Asunto</label>
+              <select id="asunto">
+                <option value="">Selecciona un asunto</option>
+                <option value="inscripcion">Inscripción al club</option>
+                <option value="informacion">Información general</option>
+                <option value="horarios">Horarios y entrenamientos</option>
+                <option value="eventos">Eventos y torneos</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-secondary">Enviar Mensaje</button>
+          </form>
+        </div>
+        <div class="contact-info reveal">
+          <div class="contact-card">
+            <span class="icon">📍</span>
+            <h4>Lugar de entrenamiento</h4>
+            <p>Polideportivo IRDET<br>Instalaciones adecuadas para la práctica del voleibol</p>
+            <div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid rgba(255,215,0,0.06);">
+              <p style="font-size:0.78rem;color:var(--gray-light);">Martes y Jueves<br>5:00 PM – 8:00 PM</p>
+            </div>
+          </div>
+          <div class="contact-card">
+            <span class="icon">📞</span>
+            <h4>Teléfono</h4>
+            <p style="font-size:1rem;font-weight:600;color:var(--white);">310 343 4293</p>
+            <p style="font-size:0.8rem;">Jorge Hercid Pérez Florez</p>
+            <p style="font-size:0.78rem;color:var(--gray-light);margin-top:0.5rem;">Director del club</p>
+          </div>
+          <div class="contact-card">
+            <span class="icon">✉️</span>
+            <h4>Correo electrónico</h4>
+            <p style="font-size:0.85rem;">Jorpeflo@yahoo.com</p>
+            <p style="font-size:0.85rem;">jorpeflo@gmail.com</p>
+          </div>
+          <div class="contact-card">
+            <span class="icon">🌐</span>
+            <h4>Redes sociales</h4>
+            <div style="display:flex;gap:1rem;margin-top:0.5rem;flex-wrap:wrap;">
+            <a href="#" class="soc-link">Instagram</a>
+            <a href="#" class="soc-link">Facebook</a>
+            <a href="#" class="soc-link">TikTok</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo inscribirse -->
+  <section class="surface-section">
+    <div class="container">
+      <div class="section-label reveal">Proceso</div>
+      <h2 class="section-title reveal">Pasos para <span>inscribirte</span></h2>
+      <p class="levels-desc reveal" style="text-align:center;margin:0 auto 0.5rem;">Haz parte de ESVOJOP en unos pasos sencillos.</p>
+      <div class="steps-grid reveal">
+        <div class="step-card">
+          <div class="s-num">01</div>
+          <h4>Contacta</h4>
+          <p>Comunícate con nosotros por teléfono, correo o redes sociales.</p>
+        </div>
+        <div class="step-arrow">▶</div>
+        <div class="step-card">
+          <div class="s-num">02</div>
+          <h4>Agenda evaluación</h4>
+          <p>Programamos una evaluación inicial gratuita para conocer tu nivel.</p>
+        </div>
+        <div class="step-arrow">▶</div>
+        <div class="step-card">
+          <div class="s-num">03</div>
+          <h4>Inscríbete</h4>
+          <p>Realiza el pago de inscripción y formaliza tu ingreso al club.</p>
+        </div>
+        <div class="step-arrow">▶</div>
+        <div class="step-card">
+          <div class="s-num">04</div>
+          <h4>Entrena</h4>
+          <p>Asiste a los entrenamientos martes y jueves en el Polideportivo IRDET.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inscripciones -->
+  <section>
+    <div class="container">
+      <div class="inscripcion-box reveal">
+        <h3>Inscripciones abiertas</h3>
+        <p>Las personas interesadas en formar parte del club pueden iniciar el proceso de inscripción realizando el registro correspondiente.</p>
+        <div class="price">$90,000 COP</div>
+        <p style="font-size:0.82rem;">La inscripción incluye el acceso al programa de entrenamiento y la evaluación inicial del atleta.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:600px;margin:1.5rem auto 0;text-align:left;">
+          <div style="background:var(--bg-alt);padding:0.8rem 1rem;border-radius:var(--radius);border:1px solid rgba(255,215,0,0.06);">
+            <div style="font-size:0.7rem;color:var(--gray-light);text-transform:uppercase;letter-spacing:0.06em;">Edades</div>
+            <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--yellow);">6–18 años</div>
+          </div>
+          <div style="background:var(--bg-alt);padding:0.8rem 1rem;border-radius:var(--radius);border:1px solid rgba(255,215,0,0.06);">
+            <div style="font-size:0.7rem;color:var(--gray-light);text-transform:uppercase;letter-spacing:0.06em;">Días</div>
+            <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--yellow);">Mar · Jue</div>
+          </div>
+          <div style="background:var(--bg-alt);padding:0.8rem 1rem;border-radius:var(--radius);border:1px solid rgba(255,215,0,0.06);">
+            <div style="font-size:0.7rem;color:var(--gray-light);text-transform:uppercase;letter-spacing:0.06em;">Horario</div>
+            <div style="font-family:var(--font-display);font-size:1.1rem;color:var(--yellow);">5–8 PM</div>
+          </div>
+        </div>
+        <p style="margin-top:1.5rem;font-size:0.82rem;color:var(--gray-light);">Los deportistas deben asistir con ropa deportiva adecuada y calzado apropiado para la práctica del voleibol.</p>
+        <a href="#" style="margin-top:1.5rem;" class="btn btn-secondary">Quiero inscribirme</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ubicación -->
+  <section class="surface-section">
+    <div class="container">
+      <div class="section-label reveal">Ubicación</div>
+      <h2 class="section-title reveal">Dónde <span>entrenamos</span></h2>
+      <p class="levels-desc reveal" style="text-align:center;margin:0 auto 2rem;">Polideportivo IRDET · Instalaciones diseñadas para el alto rendimiento.</p>
+      <div class="grid-3" style="max-width:900px;margin:0 auto;" class="reveal">
+        <div class="loc-card">
+          <span class="loc-icon">🏟️</span>
+          <h4>Cancha múltiple</h4>
+          <p>Superficie adecuada para voleibol con líneas reglamentarias y espacio óptimo para entrenamiento.</p>
+        </div>
+        <div class="loc-card">
+          <span class="loc-icon">🅿️</span>
+          <h4>Parqueadero</h4>
+          <p>Estacionamiento disponible para padres y atletas durante las horas de entrenamiento.</p>
+        </div>
+        <div class="loc-card">
+          <span class="loc-icon">🚻</span>
+          <h4>Vestidores</h4>
+          <p>Instalaciones con vestidores y baños para la comodidad de los deportistas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 ESVOJOP · Club de Voleibol &mdash; Formación deportiva de alto nivel</p>
+  <div class="social">
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+    <a href="#">TikTok</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

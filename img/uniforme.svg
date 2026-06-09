@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 350" width="300" height="350">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0055ff"/>
+      <stop offset="100%" stop-color="#0033aa"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#cc9900"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="350" fill="#0a0a1a" rx="8"/>
+  <!-- Camiseta -->
+  <path d="M100 55 L85 60 L70 90 L75 180 L90 185 L105 190 L120 195 L150 200 L180 195 L195 190 L210 185 L225 180 L230 90 L215 60 L200 55 L180 52 L150 48 L120 52 Z" fill="url(#bg)" stroke="#ffd700" stroke-width="2"/>
+  <!-- cuello -->
+  <ellipse cx="150" cy="62" rx="30" ry="12" fill="#0a0a1a" stroke="#ffd700" stroke-width="1.5"/>
+  <!-- franja amarilla horizontal -->
+  <rect x="75" y="110" width="150" height="6" rx="3" fill="url(#accent)" opacity="0.6"/>
+  <rect x="75" y="130" width="150" height="3" rx="1.5" fill="url(#accent)" opacity="0.3"/>
+  <!-- número 7 en la camiseta -->
+  <text x="150" y="162" text-anchor="middle" font-size="38" font-weight="700" fill="#ffd700" font-family="Bebas Neue, sans-serif" opacity="0.5">7</text>
+  <!-- mangas -->
+  <path d="M100 55 Q85 70 70 90 L82 93 L95 80 Z" fill="url(#bg)" stroke="#ffd700" stroke-width="1.5" opacity="0.85"/>
+  <path d="M200 55 Q215 70 230 90 L218 93 L205 80 Z" fill="url(#bg)" stroke="#ffd700" stroke-width="1.5" opacity="0.85"/>
+  <!-- Pantaloneta -->
+  <path d="M95 200 L90 210 L85 240 Q85 260 90 270 L100 275 L110 278 L130 280 L150 282 L170 280 L190 278 L200 275 L210 270 Q215 260 215 240 L210 210 L205 200 Z" fill="url(#bg)" stroke="#ffd700" stroke-width="2"/>
+  <!-- detalles pantaloneta -->
+  <line x1="95" y1="230" x2="205" y2="230" stroke="#ffd700" stroke-width="1.5" opacity="0.4"/>
+  <line x1="150" y1="200" x2="150" y2="280" stroke="#ffd700" stroke-width="1.5" opacity="0.3"/>
+  <!-- cintura -->
+  <rect x="95" y="197" width="110" height="6" rx="3" fill="url(#accent)" opacity="0.5"/>
+</svg>

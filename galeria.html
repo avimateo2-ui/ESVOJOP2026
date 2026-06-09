@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería · ESVOJOP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<nav>
+  <div class="logo">VOLEI<span>BOL</span></div>
+  <button class="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+    <li><a href="galeria.html" class="active">Galería</a></li>
+    <li><a href="contenido-extra.html">Contenido Extra</a></li>
+    <li><a href="contacto.html">Contacto</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="bg-lines"></div>
+    <div class="page-tag reveal"><span class="txt">Momentos</span></div>
+    <h1 class="page-title reveal"><span>Galería</span></h1>
+    <p class="page-desc reveal">Los mejores momentos del voleibol nacional e internacional capturados en imágenes.</p>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <img src="img/fotos/imagines/WhatsApp%20Image%202026-04-10%20at%206.04.24%20PM%20(1).jpeg" alt="Partido final" loading="lazy">
+          <div class="overlay"><span>Partido final · Liga Nacional 2025</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="img/fotos/imagines/WhatsApp%20Image%202026-04-10%20at%206.04.24%20PM.jpeg" alt="Mate espectacular" loading="lazy">
+          <div class="overlay"><span>Mate espectacular en la red</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="img/fotos/imagines/WhatsApp%20Image%202026-04-10%20at%206.04.25%20PM%20(1).jpeg" alt="Bloqueo" loading="lazy">
+          <div class="overlay"><span>Bloqueo perfecto</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="img/fotos/imagines/WhatsApp%20Image%202026-04-10%20at%206.04.25%20PM%20(2).jpeg" alt="Espíritu de equipo" loading="lazy">
+          <div class="overlay"><span>Espíritu de equipo</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="img/fotos/imagines/WhatsApp%20Image%202026-04-10%20at%206.04.25%20PM%20(3).jpeg" alt="Entrenamiento" loading="lazy">
+          <div class="overlay"><span>Entrenamiento de alto rendimiento</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="img/fotos/imagines/WhatsApp%20Image%202026-04-10%20at%206.04.25%20PM.jpeg" alt="Vóley playa" loading="lazy">
+          <div class="overlay"><span>Vóley playa · Torneo internacional</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="img/fotos/imagines/WhatsApp%20Image%202026-04-10%20at%206.04.26%20PM%20(1).jpeg" alt="Campeones" loading="lazy">
+          <div class="overlay"><span>Campeones 2025</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="img/fotos/imagines/WhatsApp%20Image%202026-04-10%20at%206.04.26%20PM%20(2).jpeg" alt="Selección nacional" loading="lazy">
+          <div class="overlay"><span>Selección nacional en acción</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <img src="img/fotos/imagines/WhatsApp%20Image%202026-04-10%20at%206.04.26%20PM%20(3).jpeg" alt="Preparación física" loading="lazy">
+          <div class="overlay"><span>Preparación física</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">&times;</button>
+  <button class="lb-nav lb-prev" id="lbPrev">&#8249;</button>
+  <button class="lb-nav lb-next" id="lbNext">&#8250;</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<footer>
+  <p>© 2026 ESVOJOP · Club de Voleibol &mdash; Formación deportiva de alto nivel</p>
+  <div class="social">
+    <a href="#">Instagram</a>
+    <a href="#">Facebook</a>
+    <a href="#">TikTok</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
