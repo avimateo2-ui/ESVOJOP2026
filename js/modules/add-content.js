@@ -616,6 +616,75 @@ const AddContent = (() => {
     requestAnimationFrame(() => card.classList.add('visible'));
   }
 
+  /* ── Page auto‑init: detects which page and wires up add buttons ── */
+  function pageInit() {
+    if (document.querySelector('.gallery-grid')) initGalleryUpload('.gallery-grid');
+    if (document.querySelector('.extra-grid')) initExtraCardAdder('.extra-grid');
+    if (document.querySelector('.prog-grid'))
+      initSectionCardAdder('.prog-grid', [
+        { name: 'icon', type: 'text', label: 'Icono', placeholder: 'Ej: 🏐' },
+        { name: 'title', type: 'text', label: 'Título', placeholder: 'Ej: Técnica' },
+        { name: 'desc', type: 'textarea', label: 'Descripción', placeholder: 'Descripción...' }
+      ]);
+    if (document.querySelector('.bene-grid'))
+      initSectionCardAdder('.bene-grid', [
+        { name: 'icon', type: 'text', label: 'Icono', placeholder: 'Ej: ⭐' },
+        { name: 'title', type: 'text', label: 'Beneficio', placeholder: 'Ej: Entrenamiento personalizado' },
+        { name: 'desc', type: 'textarea', label: 'Descripción', placeholder: 'Descripción...' }
+      ]);
+    if (document.querySelector('.met-grid'))
+      initSectionCardAdder('.met-grid', [
+        { name: 'icon', type: 'text', label: 'Icono', placeholder: 'Ej: 📋' },
+        { name: 'title', type: 'text', label: 'Título', placeholder: 'Ej: Evaluación diagnóstica' },
+        { name: 'desc', type: 'textarea', label: 'Descripción', placeholder: 'Descripción...' }
+      ]);
+    if (document.querySelector('.levels-grid'))
+      initSectionCardAdder('.levels-grid', [
+        { name: 'icon', type: 'text', label: 'Icono', placeholder: 'Ej: 🏆' },
+        { name: 'title', type: 'text', label: 'Nombre etapa', placeholder: 'Ej: Nueva etapa' },
+        { name: 'desc', type: 'textarea', label: 'Descripción', placeholder: 'Descripción...' }
+      ]);
+    if (document.querySelector('.phil-grid'))
+      initSectionCardAdder('.phil-grid', [
+        { name: 'num', type: 'text', label: 'Número', placeholder: 'Ej: 07' },
+        { name: 'title', type: 'text', label: 'Título', placeholder: 'Ej: Nuevo pilar' },
+        { name: 'desc', type: 'textarea', label: 'Descripción', placeholder: 'Descripción...' }
+      ]);
+    if (document.querySelector('.val-grid'))
+      initSectionCardAdder('.val-grid', [
+        { name: 'icon', type: 'text', label: 'Icono', placeholder: 'Ej: 🎯' },
+        { name: 'title', type: 'text', label: 'Valor', placeholder: 'Ej: Honestidad' }
+      ]);
+    const grid3 = document.querySelector('.grid-3');
+    if (grid3) {
+      const hasPos = grid3.querySelector(':scope > .pos-card');
+      initSectionCardAdder('.grid-3', hasPos
+        ? [
+            { name: 'num', type: 'text', label: 'Número', placeholder: 'Ej: 06' },
+            { name: 'icon', type: 'text', label: 'Icono', placeholder: 'Ej: 📏' },
+            { name: 'title', type: 'text', label: 'Título', placeholder: 'Ej: Nueva métrica' },
+            { name: 'desc', type: 'textarea', label: 'Descripción', placeholder: 'Descripción...' }
+          ]
+        : [
+            { name: 'icon', type: 'text', label: 'Icono', placeholder: 'Ej: 🏟️' },
+            { name: 'title', type: 'text', label: 'Título', placeholder: 'Ej: Cancha' },
+            { name: 'desc', type: 'textarea', label: 'Descripción', placeholder: 'Descripción...' }
+          ]);
+    }
+    if (document.querySelector('.contact-info'))
+      initSectionCardAdder('.contact-info', [
+        { name: 'icon', type: 'text', label: 'Icono', placeholder: 'Ej: 📞' },
+        { name: 'title', type: 'text', label: 'Título', placeholder: 'Ej: WhatsApp' },
+        { name: 'desc', type: 'textarea', label: 'Descripción', placeholder: 'Ej: 300 000 0000' }
+      ]);
+    if (document.querySelector('.steps-grid'))
+      initSectionCardAdder('.steps-grid', [
+        { name: 'num', type: 'text', label: 'Número', placeholder: 'Ej: 05' },
+        { name: 'title', type: 'text', label: 'Paso', placeholder: 'Ej: Nuevo paso' },
+        { name: 'desc', type: 'textarea', label: 'Descripción', placeholder: 'Descripción...' }
+      ]);
+  }
+
   /* ── Init ── */
   function init() {
     if (isAdmin()) {
@@ -650,6 +719,7 @@ const AddContent = (() => {
       applyEditButtons('.loc-card');
     }
     initAdminToggle();
+    pageInit();
   }
 
   /* ── Public API ── */
