@@ -1014,7 +1014,7 @@ section { padding: 5rem 3rem; position: relative; }
 .cert-card {
   background: var(--surface); padding: 2rem; border-radius: var(--radius);
   border: 1px solid rgba(255,215,0,0.1); text-align: center; max-width: 600px;
-  margin: 2.5rem auto 0; transition: all 0.4s;
+  margin: 2.5rem auto 0; transition: all 0.4s; position: relative;
 }
 .cert-card:hover { border-color: var(--yellow); transform: translateY(-4px); }
 .cert-card .cert-icon { font-size: 3rem; margin-bottom: 0.5rem; }
@@ -1029,7 +1029,7 @@ section { padding: 5rem 3rem; position: relative; }
 
 /* Valores */
 .val-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 1rem; margin-top: 2.5rem; }
-.val-item { text-align: center; padding: 1.5rem 1rem; background: var(--bg-alt); border-radius: var(--radius); border: 1px solid rgba(255,215,0,0.06); transition: all 0.4s; }
+.val-item { text-align: center; padding: 1.5rem 1rem; background: var(--bg-alt); border-radius: var(--radius); border: 1px solid rgba(255,215,0,0.06); transition: all 0.4s; position: relative; }
 .val-item:hover { border-color: var(--yellow); transform: translateY(-4px); }
 .val-item .v-icon { font-size: 2rem; margin-bottom: 0.5rem; }
 .val-item h4 { font-family: var(--font-display); font-size: 1.1rem; background: linear-gradient(135deg,var(--white),var(--yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -1074,6 +1074,7 @@ section { padding: 5rem 3rem; position: relative; }
   background: var(--surface); padding: 1.5rem; border-radius: var(--radius);
   border: 1px solid rgba(255, 215, 0, 0.08);
   transition: all var(--transition);
+  position: relative;
 }
 
 .contact-card:hover { border-color: var(--yellow); }
@@ -1156,8 +1157,8 @@ section { padding: 5rem 3rem; position: relative; }
   padding: 2rem;
   border-radius: var(--radius);
   border: 1px solid rgba(255,215,0,0.08);
-  text-align: center;
-  transition: all 0.4s;
+  text-align: center; transition: all 0.4s;
+  position: relative;
 }
 .loc-card:hover {
   border-color: var(--yellow);
@@ -1813,7 +1814,14 @@ footer .social a:hover {
 .admin-mode .met-item .delete-btn,
 .admin-mode .com-card .delete-btn,
 .admin-mode .level-card .delete-btn,
-.admin-mode .custom-card .delete-btn {
+.admin-mode .custom-card .delete-btn,
+.admin-mode .phil-card .delete-btn,
+.admin-mode .val-item .delete-btn,
+.admin-mode .pos-card .delete-btn,
+.admin-mode .cert-card .delete-btn,
+.admin-mode .contact-card .delete-btn,
+.admin-mode .step-card .delete-btn,
+.admin-mode .loc-card .delete-btn {
   display: flex;
 }
 .delete-btn:hover {
@@ -1827,7 +1835,14 @@ footer .social a:hover {
 .met-item:hover .delete-btn,
 .com-card:hover .delete-btn,
 .level-card:hover .delete-btn,
-.custom-card:hover .delete-btn {
+.custom-card:hover .delete-btn,
+.phil-card:hover .delete-btn,
+.val-item:hover .delete-btn,
+.pos-card:hover .delete-btn,
+.cert-card:hover .delete-btn,
+.contact-card:hover .delete-btn,
+.step-card:hover .delete-btn,
+.loc-card:hover .delete-btn {
   display: flex;
 }
 

@@ -27,6 +27,13 @@ const AddContent = (() => {
       applyDeleteButtons('.met-item');
       applyDeleteButtons('.com-card');
       applyDeleteButtons('.level-card');
+      applyDeleteButtons('.phil-card');
+      applyDeleteButtons('.val-item');
+      applyDeleteButtons('.pos-card');
+      applyDeleteButtons('.cert-card');
+      applyDeleteButtons('.contact-card');
+      applyDeleteButtons('.step-card');
+      applyDeleteButtons('.loc-card');
     }
   }
 
@@ -290,29 +297,54 @@ const AddContent = (() => {
     let id = grid.id || '';
     let cls = grid.className || '';
     let inner = '';
+    let cardClass = 'reveal';
 
     if (cls.includes('prog-grid') || id === 'programa') {
       inner = `<div class="p-icon">${data.icon || '🏐'}</div><h4>${data.title}</h4><p>${data.desc}</p>`;
+      cardClass = 'prog-item reveal';
     } else if (cls.includes('bene-grid') || id === 'beneficios') {
       inner = `<div class="b-icon">${data.icon || '⭐'}</div><div><h4>${data.title}</h4><p>${data.desc}</p></div>`;
+      cardClass = 'bene-item reveal';
     } else if (cls.includes('met-grid') || id === 'metodologia') {
       inner = `<div class="met-icon">${data.icon || '📋'}</div><h4>${data.title}</h4><p>${data.desc}</p>`;
+      cardClass = 'met-item reveal';
     } else if (cls.includes('levels-grid') || id === 'etapas') {
       inner = `<div class="level-badge level-inicial">Nuevo</div>
         <div class="level-icon">${data.icon || '🏆'}</div>
         <h3>${data.title}</h3>
         <p style="font-size:0.82rem;color:var(--gray);margin-bottom:1rem;line-height:1.7;">${data.desc}</p>`;
+      cardClass = 'level-card reveal';
+    } else if (cls.includes('phil-grid')) {
+      inner = `<div class="phil-num">${data.num || '00'}</div><h4>${data.title}</h4><p>${data.desc}</p>`;
+      cardClass = 'phil-card reveal';
+    } else if (cls.includes('val-grid')) {
+      inner = `<div class="v-icon">${data.icon || '⭐'}</div><h4>${data.title}</h4>`;
+      cardClass = 'val-item reveal';
+    } else if (cls.includes('grid-3')) {
+      const hasPos = grid.querySelector(':scope > .pos-card');
+      if (hasPos) {
+        inner = `<span class="num">${data.num || '00'}</span><span class="icon">${data.icon || '📌'}</span><h3>${data.title}</h3><p>${data.desc}</p>`;
+        cardClass = 'card pos-card reveal';
+      } else {
+        inner = `<span class="loc-icon">${data.icon || '📍'}</span><h4>${data.title}</h4><p>${data.desc}</p>`;
+        cardClass = 'loc-card reveal';
+      }
+    } else if (cls.includes('steps-grid')) {
+      inner = `<div class="s-num">${data.num || '00'}</div><h4>${data.title}</h4><p>${data.desc}</p>`;
+      cardClass = 'step-card reveal';
+    } else if (cls.includes('contact-info')) {
+      inner = `<span class="icon">${data.icon || '📌'}</span><h4>${data.title}</h4><p>${data.desc}</p>`;
+      cardClass = 'contact-card reveal';
     } else if (cls.includes('com-grid')) {
       inner = `<div class="com-icon">${data.icon || '📌'}</div><h4>${data.title}</h4><p>${data.desc}</p>`;
+      cardClass = 'com-card reveal';
     } else {
       inner = `<h4>${data.title}</h4><p>${data.desc}</p>`;
     }
 
     const card = document.createElement('div');
-    card.className = 'reveal';
+    card.className = cardClass;
     card.innerHTML = inner;
-    const sibling = grid.querySelector(':scope > div');
-    if (sibling) card.className += ' ' + sibling.className.replace('reveal', '').trim();
     grid.appendChild(card);
     if (isAdmin()) addDeleteBtn(card);
     requestAnimationFrame(() => card.classList.add('visible'));
