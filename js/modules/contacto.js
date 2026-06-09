@@ -7,21 +7,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = this.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.textContent = 'Enviando...';
+
+    const data = Object.fromEntries(new FormData(this).entries());
+
     try {
       const res = await fetch('https://formsubmit.co/ajax/avimateo2@gmail.com', {
         method: 'POST',
-        body: new FormData(this)
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
       });
-      if (res.ok) {
+      const json = await res.json();
+      if (json.success) {
         showToast('¡Formulario enviado con éxito! Te contactaremos pronto.');
         this.reset();
       } else {
-        showToast('Error al enviar. Intenta de nuevo.');
+        this.submit();
       }
     } catch {
-      showToast('Error de conexión. Verifica tu internet.');
+      this.submit();
     }
-    btn.disabled = false;
-    btn.textContent = 'Enviar Mensaje';
   });
 });
