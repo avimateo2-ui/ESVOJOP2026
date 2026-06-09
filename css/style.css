@@ -482,38 +482,34 @@ section { padding: 5rem 3rem; position: relative; }
 }
 
 .hero h1 .outline {
-  color: var(--white);
+  color: #fff;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.9);
-  text-stroke: 2px rgba(255, 255, 255, 0.9);
-  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5)) drop-shadow(0 0 30px rgba(0, 85, 255, 0.2));
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.95);
+  text-stroke: 2px rgba(255, 255, 255, 0.95);
+  filter: drop-shadow(0 4px 30px rgba(0,0,0,0.7)) drop-shadow(0 0 50px rgba(0, 0, 0, 0.4));
 }
 
 .hero h1 .highlight {
   color: var(--yellow);
-  background: linear-gradient(135deg, var(--yellow), var(--yellow-bright));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5)) drop-shadow(0 0 30px rgba(255, 215, 0, 0.25));
+  -webkit-text-fill-color: var(--yellow);
+  background: none;
+  filter: drop-shadow(0 4px 30px rgba(0,0,0,0.7)) drop-shadow(0 0 50px rgba(0, 0, 0, 0.4));
 }
 
 .hero h1 .blue-accent {
-  color: var(--blue-bright);
-  background: linear-gradient(135deg, var(--blue-bright), #88ccff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5)) drop-shadow(0 0 20px rgba(0, 85, 255, 0.2));
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  background: none;
+  filter: drop-shadow(0 4px 30px rgba(0,0,0,0.7)) drop-shadow(0 0 50px rgba(0, 0, 0, 0.4));
 }
 
 .hero p {
-  font-size: 1rem; color: #e8e4db;
-  -webkit-text-fill-color: #e8e4db;
+  font-size: 1rem; color: #f0ede6;
+  -webkit-text-fill-color: #f0ede6;
   background: none;
   max-width: 520px; margin: 1.2rem 0 2.5rem;
   line-height: 1.7;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.3);
 }
 
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-start; }
@@ -525,7 +521,7 @@ section { padding: 5rem 3rem; position: relative; }
 }
 .hero::after {
   content: ''; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(135deg, rgba(6,13,26,0.35), rgba(0,85,255,0.08) 50%, rgba(6,13,26,0.2));
+  background: linear-gradient(135deg, rgba(6,13,26,0.7), rgba(0,0,0,0.25) 50%, rgba(6,13,26,0.6));
 }
 .hero > * { position: relative; z-index: 2; }
 
