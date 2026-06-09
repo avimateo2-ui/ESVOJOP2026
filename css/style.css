@@ -19,8 +19,8 @@
   --yellow-bright: #ffe44d;
   --yellow-glow: rgba(255, 215, 0, 0.2);
   --white: #f0ede6;
-  --gray: #6b7b99;
-  --gray-light: #8a9abc;
+  --gray: #8a9abc;
+  --gray-light: #b0c0d8;
   --font-display: 'Bebas Neue', sans-serif;
   --font-body: 'Manrope', sans-serif;
   --radius: 4px;
@@ -41,6 +41,8 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+p { font-size: 0.95rem; line-height: 1.8; color: var(--gray); }
 
 /* ── Text Blend Utilities ── */
 .txt-gradient-blue-yellow {
