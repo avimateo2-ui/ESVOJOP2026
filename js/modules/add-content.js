@@ -119,7 +119,6 @@ const AddContent = (() => {
 
   /* ── Delete button for items ── */
   function addDeleteBtn(item) {
-    if (item.classList.contains('gallery-add-placeholder')) return;
     if (item.querySelector('.delete-btn')) return;
     const del = document.createElement('button');
     del.className = 'delete-btn admin-only';
@@ -140,7 +139,6 @@ const AddContent = (() => {
 
   /* ── Edit button for items ── */
   function addEditBtn(item) {
-    if (item.classList.contains('gallery-add-placeholder')) return;
     if (item.querySelector('.edit-btn')) return;
     const edit = document.createElement('button');
     edit.className = 'edit-btn admin-only';
@@ -420,13 +418,15 @@ const AddContent = (() => {
     return overlay;
   }
 
-  /* ── Permanent gallery add button (stays in grid) ── */
-  function createGalleryAddBtn() {
-    const el = document.createElement('div');
-    el.className = 'gallery-add-placeholder admin-only';
-    el.innerHTML = '<span class="add-icon">+</span><span class="add-text">Agregar foto</span>';
-    el.addEventListener('click', function (e) {
-      e.stopPropagation();
+  /* ── Gallery: floating + button (admin‑only) ── */
+  function initGalleryUpload(gridSelector) {
+    const grid = document.querySelector(gridSelector || '.gallery-grid');
+    if (!grid) return;
+
+    const section = grid.closest('section') || grid.parentElement;
+    const btn = createAddBtn(section, 'Agregar foto');
+
+    btn.addEventListener('click', () => {
       const overlay = showModal(`
         <h3 class="ac-title">Agregar imagen</h3>
         <form class="ac-form" id="acGalleryForm">
@@ -450,9 +450,7 @@ const AddContent = (() => {
             item.innerHTML = `
               <img src="${ev.target.result}" alt="${title}" loading="lazy">
               <div class="overlay"><span>${title}</span></div>`;
-            /* Insert new card before the permanent add button */
-            const parent = el.parentNode;
-            if (parent) parent.insertBefore(item, el);
+            grid.appendChild(item);
             if (isAdmin()) { addDeleteBtn(item); addEditBtn(item); }
             requestAnimationFrame(() => item.classList.add('visible'));
             overlay.remove();
@@ -461,14 +459,6 @@ const AddContent = (() => {
         }
       });
     });
-    return el;
-  }
-
-  /* ── Gallery: init permanent add button ── */
-  function initGalleryUpload(gridSelector) {
-    const grid = document.querySelector(gridSelector || '.gallery-grid');
-    if (!grid) return;
-    grid.appendChild(createGalleryAddBtn());
   }
 
   /* ── Extra content: add info card (with optional image) ── */
