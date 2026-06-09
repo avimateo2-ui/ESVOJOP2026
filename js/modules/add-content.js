@@ -6,20 +6,16 @@
 const AddContent = (() => {
   'use strict';
 
-  const ADMIN_PASSWORD = 'esvojop';
-  const STORAGE_KEY = 'esvojop_admin';
+  const ADMIN_USER = 'esvojop';
+  const ADMIN_PASS = 'esvojop2026';
 
-  /* ── Admin state ── */
-  function isAdmin() {
-    return sessionStorage.getItem(STORAGE_KEY) === 'true';
-  }
+  /* ── Admin state (no persistence — always require login) ── */
+  let _admin = false;
+
+  function isAdmin() { return _admin; }
 
   function setAdmin(state) {
-    if (state) {
-      sessionStorage.setItem(STORAGE_KEY, 'true');
-    } else {
-      sessionStorage.removeItem(STORAGE_KEY);
-    }
+    _admin = state;
     document.body.classList.toggle('admin-mode', state);
     const toggle = document.querySelector('.admin-toggle');
     if (toggle) toggle.textContent = state ? '🔓' : '🔒';
@@ -43,7 +39,8 @@ const AddContent = (() => {
         <button class="ac-modal-close">&times;</button>
         <h3 class="ac-title">Acceso Administrador</h3>
         <form class="ac-form" id="adminLoginForm">
-          <label>Contraseña <input type="password" name="password" placeholder="••••••" required autofocus></label>
+          <label>Usuario <input type="text" name="username" required autofocus></label>
+          <label>Contraseña <input type="password" name="password" required></label>
           <button type="submit" class="btn btn-secondary">Ingresar</button>
         </form>
       </div>`;
@@ -55,14 +52,14 @@ const AddContent = (() => {
     const form = overlay.querySelector('#adminLoginForm');
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      const pw = new FormData(this).get('password');
-      if (pw === ADMIN_PASSWORD) {
+      const data = new FormData(this);
+      if (data.get('username') === ADMIN_USER && data.get('password') === ADMIN_PASS) {
         setAdmin(true);
         overlay.remove();
       } else {
         const msg = this.querySelector('.ac-error') || document.createElement('p');
         msg.className = 'ac-error';
-        msg.textContent = 'Contraseña incorrecta';
+        msg.textContent = 'Usuario o contraseña incorrectos';
         msg.style.color = '#ff3333';
         msg.style.fontSize = '0.85rem';
         msg.style.margin = '0';
@@ -321,26 +318,9 @@ const AddContent = (() => {
     requestAnimationFrame(() => card.classList.add('visible'));
   }
 
-  /* ── Init admin mode on load ── */
+  /* ── Init ── */
   function init() {
-    // Restore admin session
-    if (isAdmin()) {
-      document.body.classList.add('admin-mode');
-    }
-
-    // Add admin toggle to footer
     initAdminToggle();
-
-    // Add delete buttons to existing items if admin
-    if (isAdmin()) {
-      applyDeleteButtons('.gallery-item');
-      applyDeleteButtons('.extra-card');
-      applyDeleteButtons('.prog-item');
-      applyDeleteButtons('.bene-item');
-      applyDeleteButtons('.met-item');
-      applyDeleteButtons('.com-card');
-      applyDeleteButtons('.level-card');
-    }
   }
 
   /* ── Public API ── */
