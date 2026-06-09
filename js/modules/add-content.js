@@ -1,15 +1,122 @@
 /* ═══════════════════════════════════════════
-   Add Content Module
-   Gallery photo upload · Content card creator
+   Admin + Add Content Module
+   Admin login, gallery upload, card creator, delete
    ═══════════════════════════════════════════ */
 
 const AddContent = (() => {
   'use strict';
 
-  /* ── Shared: floating "+" button ── */
+  const ADMIN_PASSWORD = 'esvojop';
+  const STORAGE_KEY = 'esvojop_admin';
+
+  /* ── Admin state ── */
+  function isAdmin() {
+    return sessionStorage.getItem(STORAGE_KEY) === 'true';
+  }
+
+  function setAdmin(state) {
+    if (state) {
+      sessionStorage.setItem(STORAGE_KEY, 'true');
+    } else {
+      sessionStorage.removeItem(STORAGE_KEY);
+    }
+    document.body.classList.toggle('admin-mode', state);
+    const toggle = document.querySelector('.admin-toggle');
+    if (toggle) toggle.textContent = state ? '🔓' : '🔒';
+    if (state) {
+      applyDeleteButtons('.gallery-item');
+      applyDeleteButtons('.extra-card');
+      applyDeleteButtons('.prog-item');
+      applyDeleteButtons('.bene-item');
+      applyDeleteButtons('.met-item');
+      applyDeleteButtons('.com-card');
+      applyDeleteButtons('.level-card');
+    }
+  }
+
+  /* ── Admin login modal ── */
+  function showLoginModal() {
+    const overlay = document.createElement('div');
+    overlay.className = 'ac-modal';
+    overlay.innerHTML = `
+      <div class="ac-modal-box">
+        <button class="ac-modal-close">&times;</button>
+        <h3 class="ac-title">Acceso Administrador</h3>
+        <form class="ac-form" id="adminLoginForm">
+          <label>Contraseña <input type="password" name="password" placeholder="••••••" required autofocus></label>
+          <button type="submit" class="btn btn-secondary">Ingresar</button>
+        </form>
+      </div>`;
+
+    overlay.querySelector('.ac-modal-close').addEventListener('click', () => overlay.remove());
+    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+    document.body.appendChild(overlay);
+
+    const form = overlay.querySelector('#adminLoginForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const pw = new FormData(this).get('password');
+      if (pw === ADMIN_PASSWORD) {
+        setAdmin(true);
+        overlay.remove();
+      } else {
+        const msg = this.querySelector('.ac-error') || document.createElement('p');
+        msg.className = 'ac-error';
+        msg.textContent = 'Contraseña incorrecta';
+        msg.style.color = '#ff3333';
+        msg.style.fontSize = '0.85rem';
+        msg.style.margin = '0';
+        if (!this.querySelector('.ac-error')) this.appendChild(msg);
+      }
+    });
+  }
+
+  /* ── Admin toggle button ── */
+  function initAdminToggle() {
+    if (document.querySelector('.admin-toggle')) return;
+
+    const toggle = document.createElement('button');
+    toggle.className = 'admin-toggle';
+    toggle.title = isAdmin() ? 'Cerrar sesión admin' : 'Iniciar sesión admin';
+    toggle.setAttribute('aria-label', 'Administrador');
+    toggle.textContent = isAdmin() ? '🔓' : '🔒';
+
+    toggle.addEventListener('click', () => {
+      if (isAdmin()) {
+        setAdmin(false);
+      } else {
+        showLoginModal();
+      }
+    });
+
+    const target = document.querySelector('footer .social') || document.querySelector('footer');
+    if (target) target.appendChild(toggle);
+  }
+
+  /* ── Delete button for items ── */
+  function addDeleteBtn(item) {
+    if (item.querySelector('.delete-btn')) return;
+    const del = document.createElement('button');
+    del.className = 'delete-btn admin-only';
+    del.innerHTML = '&times;';
+    del.title = 'Eliminar';
+    del.addEventListener('click', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      item.remove();
+    });
+    item.appendChild(del);
+  }
+
+  /* ── Apply delete buttons to existing items ── */
+  function applyDeleteButtons(selector) {
+    document.querySelectorAll(selector).forEach(addDeleteBtn);
+  }
+
+  /* ── Shared: floating "+" button — admin-only ── */
   function createAddBtn(container, label) {
     const btn = document.createElement('button');
-    btn.className = 'add-content-btn';
+    btn.className = 'add-content-btn admin-only';
     btn.innerHTML = '<span>+</span>';
     btn.title = label || 'Agregar';
     btn.setAttribute('aria-label', label || 'Agregar');
@@ -72,6 +179,10 @@ const AddContent = (() => {
             <img src="${e.target.result}" alt="${label}" loading="lazy">
             <div class="overlay"><span>${label}</span></div>`;
           grid.appendChild(item);
+
+          // if admin is logged in, add delete btn
+          if (isAdmin()) addDeleteBtn(item);
+
           requestAnimationFrame(() => item.classList.add('visible'));
         };
         reader.readAsDataURL(file);
@@ -114,7 +225,7 @@ const AddContent = (() => {
           };
           reader.readAsDataURL(imgFile);
         } else {
-          addExtraCard(grid, cat, title, 'img/ballon.svg');
+          addExtraCard(grid, cat, title, 'img/rodillera.svg');
           overlay.remove();
         }
       });
@@ -133,10 +244,11 @@ const AddContent = (() => {
         <h4>${title}</h4>
       </div>`;
     grid.appendChild(card);
+    if (isAdmin()) addDeleteBtn(card);
     requestAnimationFrame(() => card.classList.add('visible'));
   }
 
-  /* ── Index sections: add info cards (programa, beneficios, etc.) ── */
+  /* ── Index sections: add info cards ── */
   function initSectionCardAdder(gridSelector, fields) {
     const grid = document.querySelector(gridSelector);
     if (!grid) return;
@@ -188,6 +300,11 @@ const AddContent = (() => {
       inner = `<div class="b-icon">${data.icon || '⭐'}</div><div><h4>${data.title}</h4><p>${data.desc}</p></div>`;
     } else if (cls.includes('met-grid') || id === 'metodologia') {
       inner = `<div class="met-icon">${data.icon || '📋'}</div><h4>${data.title}</h4><p>${data.desc}</p>`;
+    } else if (cls.includes('levels-grid') || id === 'etapas') {
+      inner = `<div class="level-badge level-inicial">Nuevo</div>
+        <div class="level-icon">${data.icon || '🏆'}</div>
+        <h3>${data.title}</h3>
+        <p style="font-size:0.82rem;color:var(--gray);margin-bottom:1rem;line-height:1.7;">${data.desc}</p>`;
     } else if (cls.includes('com-grid')) {
       inner = `<div class="com-icon">${data.icon || '📌'}</div><h4>${data.title}</h4><p>${data.desc}</p>`;
     } else {
@@ -197,17 +314,43 @@ const AddContent = (() => {
     const card = document.createElement('div');
     card.className = 'reveal';
     card.innerHTML = inner;
-    // add class from sibling
     const sibling = grid.querySelector(':scope > div');
     if (sibling) card.className += ' ' + sibling.className.replace('reveal', '').trim();
     grid.appendChild(card);
+    if (isAdmin()) addDeleteBtn(card);
     requestAnimationFrame(() => card.classList.add('visible'));
+  }
+
+  /* ── Init admin mode on load ── */
+  function init() {
+    // Restore admin session
+    if (isAdmin()) {
+      document.body.classList.add('admin-mode');
+    }
+
+    // Add admin toggle to footer
+    initAdminToggle();
+
+    // Add delete buttons to existing items if admin
+    if (isAdmin()) {
+      applyDeleteButtons('.gallery-item');
+      applyDeleteButtons('.extra-card');
+      applyDeleteButtons('.prog-item');
+      applyDeleteButtons('.bene-item');
+      applyDeleteButtons('.met-item');
+      applyDeleteButtons('.com-card');
+      applyDeleteButtons('.level-card');
+    }
   }
 
   /* ── Public API ── */
   return {
     gallery: initGalleryUpload,
     extraCards: initExtraCardAdder,
-    sectionCards: initSectionCardAdder
+    sectionCards: initSectionCardAdder,
+    init: init
   };
 })();
+
+// Auto-init
+document.addEventListener('DOMContentLoaded', () => AddContent.init());

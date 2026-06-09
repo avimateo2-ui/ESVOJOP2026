@@ -718,6 +718,7 @@ section { padding: 5rem 3rem; position: relative; }
   border: 1px solid rgba(255, 215, 0, 0.08);
   text-align: center;
   transition: all 0.4s;
+  position: relative;
 }
 
 .prog-item:hover {
@@ -765,6 +766,7 @@ section { padding: 5rem 3rem; position: relative; }
   border-radius: var(--radius);
   border: 1px solid rgba(255, 215, 0, 0.08);
   transition: all 0.4s;
+  position: relative;
 }
 
 .bene-item:hover {
@@ -1559,8 +1561,8 @@ footer .social a:hover {
   padding: 2rem 1.5rem;
   border-radius: var(--radius);
   border: 1px solid rgba(255, 215, 0, 0.08);
-  text-align: center;
   transition: all 0.4s;
+  position: relative;
 }
 .com-card:hover {
   transform: translateY(-5px);
@@ -1772,6 +1774,62 @@ footer .social a:hover {
 }
 .ac-form textarea { resize: vertical; min-height: 80px; }
 .ac-form .btn { align-self: flex-start; }
+.ac-error { margin: 0; }
+
+/* ── Admin: hidden by default, shown in admin mode ── */
+.admin-only { display: none !important; }
+.admin-mode .admin-only { display: flex !important; }
+.admin-mode .admin-only.inline { display: inline-flex !important; }
+
+/* ── Admin toggle button (footer) ── */
+.admin-toggle {
+  background: none; border: 1px solid rgba(255,215,0,0.2);
+  border-radius: 50%; width: 36px; height: 36px;
+  font-size: 1rem; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: all 0.3s; margin-left: 0.5rem;
+  color: var(--gray);
+}
+.admin-toggle:hover {
+  border-color: var(--yellow);
+  background: rgba(255,215,0,0.1);
+  color: var(--yellow);
+}
+
+/* ── Delete button on items ── */
+.delete-btn {
+  position: absolute; top: 0.5rem; right: 0.5rem;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(255,0,0,0.7); border: none;
+  color: #fff; font-size: 1.2rem; line-height: 1;
+  cursor: pointer; z-index: 10;
+  display: none; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.admin-mode .gallery-item .delete-btn,
+.admin-mode .extra-card .delete-btn,
+.admin-mode .prog-item .delete-btn,
+.admin-mode .bene-item .delete-btn,
+.admin-mode .met-item .delete-btn,
+.admin-mode .com-card .delete-btn,
+.admin-mode .level-card .delete-btn,
+.admin-mode .custom-card .delete-btn {
+  display: flex;
+}
+.delete-btn:hover {
+  background: rgba(255,0,0,0.9);
+  transform: scale(1.15);
+}
+.gallery-item:hover .delete-btn,
+.extra-card:hover .delete-btn,
+.prog-item:hover .delete-btn,
+.bene-item:hover .delete-btn,
+.met-item:hover .delete-btn,
+.com-card:hover .delete-btn,
+.level-card:hover .delete-btn,
+.custom-card:hover .delete-btn {
+  display: flex;
+}
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
