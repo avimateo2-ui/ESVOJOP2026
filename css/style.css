@@ -504,12 +504,12 @@ section { padding: 5rem 3rem; position: relative; }
 }
 
 .hero p {
-  font-size: 1rem; color: #f0ede6;
-  -webkit-text-fill-color: #f0ede6;
+  font-size: 1rem; color: #fff;
+  -webkit-text-fill-color: #fff;
   background: none;
   max-width: 520px; margin: 1.2rem 0 2.5rem;
-  line-height: 1.7;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.3);
+  line-height: 1.8;
+  text-shadow: 0 2px 25px rgba(0,0,0,0.9), 0 0 50px rgba(0,0,0,0.4);
 }
 
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-start; }
