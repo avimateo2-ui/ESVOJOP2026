@@ -3,6 +3,20 @@
    Shared JavaScript
    ═══════════════════════════════════════════ */
 
+/* ── Toast System (global) ── */
+function showToast(message) {
+  let toast = document.querySelector('.toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add('show');
+  clearTimeout(toast._hide);
+  toast._hide = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Cursor Glow ── */
@@ -83,53 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ── Contact Form (FormSubmit AJAX) ── */
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = this.querySelector('button[type="submit"]');
-      btn.disabled = true;
-      btn.textContent = 'Enviando...';
-      try {
-        const res = await fetch('https://formsubmit.co/ajax/jorpeflo@gmail.com', {
-          method: 'POST',
-          body: new FormData(this)
-        });
-        if (res.ok) {
-          showToast('¡Formulario enviado con éxito! Te contactaremos pronto.');
-          this.reset();
-        } else {
-          showToast('Error al enviar. Intenta de nuevo.');
-        }
-      } catch {
-        showToast('Error de conexión. Verifica tu internet.');
-      }
-      btn.disabled = false;
-      btn.textContent = 'Enviar Mensaje';
-    });
-  }
-
   /* ── Add to Cart Toast ── */
   document.querySelectorAll('.add-to-cart').forEach((btn) => {
     btn.addEventListener('click', () => {
       showToast('Producto agregado al carrito ✓');
     });
   });
-
-  /* ── Toast System ── */
-  function showToast(message) {
-    let toast = document.querySelector('.toast');
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.className = 'toast';
-      document.body.appendChild(toast);
-    }
-    toast.textContent = message;
-    toast.classList.add('show');
-    clearTimeout(toast._hide);
-    toast._hide = setTimeout(() => toast.classList.remove('show'), 3000);
-  }
 
   /* ── Lightbox Shared ── */
   const lightbox = document.getElementById('lightbox');
