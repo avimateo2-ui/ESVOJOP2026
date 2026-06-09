@@ -9,6 +9,9 @@ const AddContent = (() => {
   const ADMIN_USER = 'esvojop';
   const ADMIN_PASS = 'esvojop2026';
 
+  /* ── Gallery storage (persistent via localStorage) ── */
+  const GALLERY_KEY = 'esvojop_gallery';
+
   /* ── Admin state (persistent via sessionStorage) ── */
   const STORAGE_KEY = 'esvojop_admin';
   let _admin = sessionStorage.getItem(STORAGE_KEY) === 'true';
@@ -127,6 +130,12 @@ const AddContent = (() => {
     del.addEventListener('click', function (e) {
       e.stopPropagation();
       e.preventDefault();
+      const gId = item.dataset.galleryId;
+      if (gId) {
+        let stored = JSON.parse(localStorage.getItem(GALLERY_KEY) || '[]');
+        stored = stored.filter(i => i.id != gId);
+        localStorage.setItem(GALLERY_KEY, JSON.stringify(stored));
+      }
       item.remove();
     });
     item.appendChild(del);
@@ -320,10 +329,16 @@ const AddContent = (() => {
         const imgFile = data.img;
         if (span) span.textContent = data.title || span.textContent;
         if (img) img.alt = data.title || img.alt;
+        const gId = card.dataset.galleryId;
         if (imgFile && imgFile.size) {
           const reader = new FileReader();
-          reader.onload = ev => { if (img) img.src = ev.target.result; };
+          reader.onload = ev => {
+            if (img) img.src = ev.target.result;
+            if (gId) syncGalleryItem(gId, data.title, ev.target.result);
+          };
           reader.readAsDataURL(imgFile);
+        } else if (gId && data.title) {
+          syncGalleryItem(gId, data.title);
         }
       } else if (cls.includes('extra-card')) {
         const catEl = card.querySelector('.ec-cat');
@@ -638,18 +653,51 @@ const AddContent = (() => {
       if (imgFile && imgFile.size) {
         const reader = new FileReader();
         reader.onload = ev => {
+          const id = Date.now();
           const item = document.createElement('div');
           item.className = 'gallery-item';
+          item.dataset.galleryId = id;
           item.innerHTML = `
             <img src="${ev.target.result}" alt="${title}" loading="lazy">
             <div class="overlay"><span>${title}</span></div>`;
           grid.appendChild(item);
+          // Persist
+          let stored = JSON.parse(localStorage.getItem(GALLERY_KEY) || '[]');
+          stored.push({ id, title, src: ev.target.result });
+          localStorage.setItem(GALLERY_KEY, JSON.stringify(stored));
           if (isAdmin()) { addDeleteBtn(item); addEditBtn(item); }
           requestAnimationFrame(() => item.classList.add('visible'));
           overlay.remove();
         };
         reader.readAsDataURL(imgFile);
       }
+    });
+  }
+
+  /* ── Gallery localStorage helpers ── */
+  function syncGalleryItem(id, title, src) {
+    let stored = JSON.parse(localStorage.getItem(GALLERY_KEY) || '[]');
+    const found = stored.find(i => i.id == id);
+    if (found) {
+      if (title) found.title = title;
+      if (src) found.src = src;
+    }
+    localStorage.setItem(GALLERY_KEY, JSON.stringify(stored));
+  }
+
+  function loadGalleryItems() {
+    const grid = document.querySelector('.gallery-grid');
+    if (!grid) return;
+    const stored = JSON.parse(localStorage.getItem(GALLERY_KEY) || '[]');
+    stored.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'gallery-item';
+      div.dataset.galleryId = item.id;
+      div.innerHTML = `
+        <img src="${item.src}" alt="${item.title}" loading="lazy">
+        <div class="overlay"><span>${item.title}</span></div>`;
+      grid.appendChild(div);
+      if (isAdmin()) { addDeleteBtn(div); addEditBtn(div); }
     });
   }
 
@@ -762,6 +810,7 @@ const AddContent = (() => {
       applyEditButtons('.loc-card');
     }
     initAdminToggle();
+    loadGalleryItems();
     pageInit();
   }
 
