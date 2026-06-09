@@ -40,6 +40,20 @@ const AddContent = (() => {
       applyDeleteButtons('.contact-card');
       applyDeleteButtons('.step-card');
       applyDeleteButtons('.loc-card');
+      applyEditButtons('.gallery-item');
+      applyEditButtons('.extra-card');
+      applyEditButtons('.prog-item');
+      applyEditButtons('.bene-item');
+      applyEditButtons('.met-item');
+      applyEditButtons('.com-card');
+      applyEditButtons('.level-card');
+      applyEditButtons('.phil-card');
+      applyEditButtons('.val-item');
+      applyEditButtons('.pos-card');
+      applyEditButtons('.cert-card');
+      applyEditButtons('.contact-card');
+      applyEditButtons('.step-card');
+      applyEditButtons('.loc-card');
     }
   }
 
@@ -123,6 +137,240 @@ const AddContent = (() => {
     document.querySelectorAll(selector).forEach(addDeleteBtn);
   }
 
+  /* ── Edit button for items ── */
+  function addEditBtn(item) {
+    if (item.querySelector('.edit-btn')) return;
+    const edit = document.createElement('button');
+    edit.className = 'edit-btn admin-only';
+    edit.innerHTML = '&#9998;';
+    edit.title = 'Editar';
+    edit.addEventListener('click', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      editCard(item);
+    });
+    item.appendChild(edit);
+  }
+
+  function applyEditButtons(selector) {
+    document.querySelectorAll(selector).forEach(addEditBtn);
+  }
+
+  /* ── Edit card modal ── */
+  function editCard(card) {
+    const cls = card.className;
+    let fields = [];
+    let values = {};
+
+    // gallery item
+    if (cls.includes('gallery-item')) {
+      const img = card.querySelector('img');
+      const span = card.querySelector('.overlay span');
+      fields = [{ name: 'title', type: 'text', label: 'Título' }];
+      values.title = span ? span.textContent : (img ? img.alt : '');
+    }
+    // extra card
+    else if (cls.includes('extra-card')) {
+      const cat = card.querySelector('.ec-cat');
+      const title = card.querySelector('h4');
+      fields = [
+        { name: 'cat', type: 'text', label: 'Categoría' },
+        { name: 'title', type: 'text', label: 'Título' },
+        { name: 'img', type: 'file', label: 'Imagen (opcional)' }
+      ];
+      values.cat = cat ? cat.textContent : '';
+      values.title = title ? title.textContent : '';
+    }
+    // certification card
+    else if (cls.includes('cert-card')) {
+      const title = card.querySelector('h3');
+      const p = card.querySelector('p');
+      fields = [
+        { name: 'title', type: 'text', label: 'Título' },
+        { name: 'desc', type: 'textarea', label: 'Descripción' }
+      ];
+      values.title = title ? title.textContent : '';
+      values.desc = p ? p.textContent : '';
+    }
+    // step card
+    else if (cls.includes('step-card')) {
+      const num = card.querySelector('.s-num');
+      const title = card.querySelector('h4');
+      const p = card.querySelector('p');
+      fields = [
+        { name: 'num', type: 'text', label: 'Número' },
+        { name: 'title', type: 'text', label: 'Título' },
+        { name: 'desc', type: 'textarea', label: 'Descripción' }
+      ];
+      values.num = num ? num.textContent : '';
+      values.title = title ? title.textContent : '';
+      values.desc = p ? p.textContent : '';
+    }
+    // cards with icon + h4 + p (prog, bene, met, com, loc, contact)
+    else if (cls.includes('prog-item') || cls.includes('bene-item') || cls.includes('met-item') ||
+             cls.includes('com-card') || cls.includes('loc-card') || cls.includes('contact-card')) {
+      const iconEl = card.querySelector('.p-icon, .b-icon, .met-icon, .com-icon, .loc-icon, .icon');
+      const title = card.querySelector('h4');
+      const p = card.querySelector('p');
+      fields = [
+        { name: 'icon', type: 'text', label: 'Icono' },
+        { name: 'title', type: 'text', label: 'Título' },
+        { name: 'desc', type: 'textarea', label: 'Descripción' }
+      ];
+      values.icon = iconEl ? iconEl.textContent : '';
+      values.title = title ? title.textContent : '';
+      values.desc = p ? p.textContent : '';
+    }
+    // val item (icon + h4)
+    else if (cls.includes('val-item')) {
+      const iconEl = card.querySelector('.v-icon');
+      const title = card.querySelector('h4');
+      fields = [
+        { name: 'icon', type: 'text', label: 'Icono' },
+        { name: 'title', type: 'text', label: 'Título' }
+      ];
+      values.icon = iconEl ? iconEl.textContent : '';
+      values.title = title ? title.textContent : '';
+    }
+    // phil card (num + h4 + p)
+    else if (cls.includes('phil-card')) {
+      const num = card.querySelector('.phil-num');
+      const title = card.querySelector('h4');
+      const p = card.querySelector('p');
+      fields = [
+        { name: 'num', type: 'text', label: 'Número' },
+        { name: 'title', type: 'text', label: 'Título' },
+        { name: 'desc', type: 'textarea', label: 'Descripción' }
+      ];
+      values.num = num ? num.textContent : '';
+      values.title = title ? title.textContent : '';
+      values.desc = p ? p.textContent : '';
+    }
+    // pos card (num + icon + h3 + p)
+    else if (cls.includes('pos-card')) {
+      const num = card.querySelector('.num');
+      const iconEl = card.querySelector('.icon');
+      const title = card.querySelector('h3');
+      const p = card.querySelector('p');
+      fields = [
+        { name: 'num', type: 'text', label: 'Número' },
+        { name: 'icon', type: 'text', label: 'Icono' },
+        { name: 'title', type: 'text', label: 'Título' },
+        { name: 'desc', type: 'textarea', label: 'Descripción' }
+      ];
+      values.num = num ? num.textContent : '';
+      values.icon = iconEl ? iconEl.textContent : '';
+      values.title = title ? title.textContent : '';
+      values.desc = p ? p.textContent : '';
+    }
+    // level card (icon + h3 + p)
+    else if (cls.includes('level-card')) {
+      const iconEl = card.querySelector('.level-icon');
+      const title = card.querySelector('h3');
+      const p = card.querySelector('p');
+      fields = [
+        { name: 'icon', type: 'text', label: 'Icono' },
+        { name: 'title', type: 'text', label: 'Título' },
+        { name: 'desc', type: 'textarea', label: 'Descripción' }
+      ];
+      values.icon = iconEl ? iconEl.textContent : '';
+      values.title = title ? title.textContent : '';
+      values.desc = p ? p.textContent : '';
+    }
+    // fallback: generic h4 + p
+    else {
+      const title = card.querySelector('h3, h4');
+      const p = card.querySelector('p');
+      fields = [
+        { name: 'title', type: 'text', label: 'Título' },
+        { name: 'desc', type: 'textarea', label: 'Descripción' }
+      ];
+      values.title = title ? title.textContent : '';
+      values.desc = p ? p.textContent : '';
+    }
+
+    // Build modal
+    let html = '<h3 class="ac-title">Editar contenido</h3><form class="ac-form" id="acEditForm">';
+    fields.forEach(f => {
+      const val = (values[f.name] || '').replace(/"/g, '&quot;');
+      if (f.type === 'textarea') {
+        html += `<label>${f.label} <textarea name="${f.name}">${val}</textarea></label>`;
+      } else if (f.type === 'file') {
+        html += `<label>${f.label} <input type="file" name="${f.name}" accept="image/*"></label>`;
+      } else {
+        html += `<label>${f.label} <input type="text" name="${f.name}" value="${val}"></label>`;
+      }
+    });
+    html += '<button type="submit" class="btn btn-secondary">Guardar</button></form>';
+
+    const overlay = showModal(html);
+    const form = overlay.querySelector('#acEditForm');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this));
+
+      // Update card based on type
+      if (cls.includes('gallery-item')) {
+        const img = card.querySelector('img');
+        const span = card.querySelector('.overlay span');
+        if (span) span.textContent = data.title || span.textContent;
+        if (img) img.alt = data.title || img.alt;
+      } else if (cls.includes('extra-card')) {
+        const catEl = card.querySelector('.ec-cat');
+        const titleEl = card.querySelector('h4');
+        const imgFile = data.img;
+        if (catEl) catEl.textContent = data.cat || catEl.textContent;
+        if (titleEl) titleEl.textContent = data.title || titleEl.textContent;
+        if (imgFile && imgFile.size) {
+          const reader = new FileReader();
+          reader.onload = ev => {
+            const img = card.querySelector('.ec-img');
+            if (img) { img.src = ev.target.result; img.alt = data.title || img.alt; }
+            card.dataset.img = ev.target.result;
+          };
+          reader.readAsDataURL(imgFile);
+        }
+      } else {
+        // Regenerate inner HTML using same pattern as addSectionCard
+        let newInner = '';
+        if (cls.includes('phil-card')) {
+          newInner = `<div class="phil-num">${data.num || values.num}</div><h4>${data.title}</h4><p>${data.desc}</p>`;
+        } else if (cls.includes('val-item')) {
+          newInner = `<div class="v-icon">${data.icon || values.icon}</div><h4>${data.title}</h4>`;
+        } else if (cls.includes('pos-card')) {
+          newInner = `<span class="num">${data.num || values.num}</span><span class="icon">${data.icon || values.icon}</span><h3>${data.title}</h3><p>${data.desc}</p>`;
+        } else if (cls.includes('step-card')) {
+          newInner = `<div class="s-num">${data.num || values.num}</div><h4>${data.title}</h4><p>${data.desc}</p>`;
+        } else if (cls.includes('cert-card')) {
+          newInner = `<div class="cert-icon">🎖️</div><h3>${data.title}</h3><p>${data.desc}</p><div class="cert-seal">Excelencia ESVOJOP</div>`;
+        } else if (cls.includes('level-card')) {
+          newInner = `<div class="level-badge level-inicial">Editado</div><div class="level-icon">${data.icon || values.icon}</div><h3>${data.title}</h3><p style="font-size:0.82rem;color:var(--gray);margin-bottom:1rem;line-height:1.7;">${data.desc}</p>`;
+        } else if (cls.includes('prog-item') || cls.includes('bene-item') || cls.includes('met-item') ||
+                   cls.includes('com-card') || cls.includes('loc-card') || cls.includes('contact-card')) {
+          let iconTag = '';
+          if (cls.includes('prog-item')) iconTag = 'p-icon';
+          else if (cls.includes('bene-item')) iconTag = 'b-icon';
+          else if (cls.includes('met-item')) iconTag = 'met-icon';
+          else if (cls.includes('com-card')) iconTag = 'com-icon';
+          else if (cls.includes('loc-card')) iconTag = 'loc-icon';
+          else iconTag = 'icon';
+          if (cls.includes('bene-item')) {
+            newInner = `<div class="${iconTag}">${data.icon || values.icon}</div><div><h4>${data.title}</h4><p>${data.desc}</p></div>`;
+          } else {
+            newInner = `<div class="${iconTag}">${data.icon || values.icon}</div><h4>${data.title}</h4><p>${data.desc}</p>`;
+          }
+        } else {
+          newInner = `<h4>${data.title}</h4><p>${data.desc}</p>`;
+        }
+        card.innerHTML = newInner;
+        // Re-add admin buttons
+        if (isAdmin()) { addDeleteBtn(card); addEditBtn(card); }
+      }
+      overlay.remove();
+    });
+  }
+
   /* ── Shared: floating "+" button — admin-only ── */
   function createAddBtn(container, label) {
     const btn = document.createElement('button');
@@ -190,8 +438,8 @@ const AddContent = (() => {
             <div class="overlay"><span>${label}</span></div>`;
           grid.appendChild(item);
 
-          // if admin is logged in, add delete btn
-          if (isAdmin()) addDeleteBtn(item);
+          // if admin is logged in, add delete + edit btns
+          if (isAdmin()) { addDeleteBtn(item); addEditBtn(item); }
 
           requestAnimationFrame(() => item.classList.add('visible'));
         };
@@ -254,7 +502,7 @@ const AddContent = (() => {
         <h4>${title}</h4>
       </div>`;
     grid.appendChild(card);
-    if (isAdmin()) addDeleteBtn(card);
+    if (isAdmin()) { addDeleteBtn(card); addEditBtn(card); }
     requestAnimationFrame(() => card.classList.add('visible'));
   }
 
@@ -352,7 +600,7 @@ const AddContent = (() => {
     card.className = cardClass;
     card.innerHTML = inner;
     grid.appendChild(card);
-    if (isAdmin()) addDeleteBtn(card);
+    if (isAdmin()) { addDeleteBtn(card); addEditBtn(card); }
     requestAnimationFrame(() => card.classList.add('visible'));
   }
 
@@ -374,6 +622,20 @@ const AddContent = (() => {
       applyDeleteButtons('.contact-card');
       applyDeleteButtons('.step-card');
       applyDeleteButtons('.loc-card');
+      applyEditButtons('.gallery-item');
+      applyEditButtons('.extra-card');
+      applyEditButtons('.prog-item');
+      applyEditButtons('.bene-item');
+      applyEditButtons('.met-item');
+      applyEditButtons('.com-card');
+      applyEditButtons('.level-card');
+      applyEditButtons('.phil-card');
+      applyEditButtons('.val-item');
+      applyEditButtons('.pos-card');
+      applyEditButtons('.cert-card');
+      applyEditButtons('.contact-card');
+      applyEditButtons('.step-card');
+      applyEditButtons('.loc-card');
     }
     initAdminToggle();
   }

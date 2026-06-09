@@ -1828,6 +1828,55 @@ footer .social a:hover {
   background: rgba(255,0,0,0.9);
   transform: scale(1.15);
 }
+
+/* ── Edit button on items ── */
+.edit-btn {
+  position: absolute; top: 0.5rem; right: 2.5rem;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(0,85,255,0.7); border: none;
+  color: #fff; font-size: 0.9rem; line-height: 1;
+  cursor: pointer; z-index: 10;
+  display: none; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.admin-mode .gallery-item .edit-btn,
+.admin-mode .extra-card .edit-btn,
+.admin-mode .prog-item .edit-btn,
+.admin-mode .bene-item .edit-btn,
+.admin-mode .met-item .edit-btn,
+.admin-mode .com-card .edit-btn,
+.admin-mode .level-card .edit-btn,
+.admin-mode .custom-card .edit-btn,
+.admin-mode .phil-card .edit-btn,
+.admin-mode .val-item .edit-btn,
+.admin-mode .pos-card .edit-btn,
+.admin-mode .cert-card .edit-btn,
+.admin-mode .contact-card .edit-btn,
+.admin-mode .step-card .edit-btn,
+.admin-mode .loc-card .edit-btn {
+  display: flex;
+}
+.edit-btn:hover {
+  background: rgba(0,85,255,0.9);
+  transform: scale(1.15);
+}
+.gallery-item:hover .edit-btn,
+.extra-card:hover .edit-btn,
+.prog-item:hover .edit-btn,
+.bene-item:hover .edit-btn,
+.met-item:hover .edit-btn,
+.com-card:hover .edit-btn,
+.level-card:hover .edit-btn,
+.custom-card:hover .edit-btn,
+.phil-card:hover .edit-btn,
+.val-item:hover .edit-btn,
+.pos-card:hover .edit-btn,
+.cert-card:hover .edit-btn,
+.contact-card:hover .edit-btn,
+.step-card:hover .edit-btn,
+.loc-card:hover .edit-btn {
+  display: flex;
+}
 .gallery-item:hover .delete-btn,
 .extra-card:hover .delete-btn,
 .prog-item:hover .delete-btn,
