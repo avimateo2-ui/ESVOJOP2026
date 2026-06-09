@@ -1722,6 +1722,28 @@ footer .social a:hover {
 }
 .add-content-btn span { margin-top: -2px; }
 
+/* ── Gallery add button (hardcoded in HTML) ── */
+.gallery-add-btn {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+  font-size: 1.8rem; line-height: 1;
+  cursor: pointer; z-index: 5;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(255,215,0,0.1);
+  font-family: var(--font-body);
+  padding: 0;
+}
+.gallery-add-btn:hover {
+  background: var(--yellow);
+  color: var(--bg);
+  box-shadow: 0 0 35px rgba(255,215,0,0.3);
+  transform: scale(1.1);
+}
+
 /* ── Add Content Modal ── */
 .ac-modal {
   position: fixed; inset: 0; z-index: 9999;

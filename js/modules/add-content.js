@@ -616,9 +616,52 @@ const AddContent = (() => {
     requestAnimationFrame(() => card.classList.add('visible'));
   }
 
+  /* ── Gallery add modal (called from HTML button) ── */
+  function openGalleryAddModal() {
+    const grid = document.querySelector('.gallery-grid');
+    if (!grid) return;
+    const overlay = showModal(`
+      <h3 class="ac-title">Agregar imagen</h3>
+      <form class="ac-form" id="acGalleryForm">
+        <label>Título <input type="text" name="title" placeholder="Nombre de la imagen" required></label>
+        <label>Imagen <input type="file" name="img" accept="image/*" required></label>
+        <button type="submit" class="btn btn-secondary">Agregar</button>
+      </form>`);
+
+    const form = overlay.querySelector('#acGalleryForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const data = new FormData(this);
+      const title = data.get('title');
+      const imgFile = data.get('img');
+
+      if (imgFile && imgFile.size) {
+        const reader = new FileReader();
+        reader.onload = ev => {
+          const item = document.createElement('div');
+          item.className = 'gallery-item';
+          item.innerHTML = `
+            <img src="${ev.target.result}" alt="${title}" loading="lazy">
+            <div class="overlay"><span>${title}</span></div>`;
+          grid.appendChild(item);
+          if (isAdmin()) { addDeleteBtn(item); addEditBtn(item); }
+          requestAnimationFrame(() => item.classList.add('visible'));
+          overlay.remove();
+        };
+        reader.readAsDataURL(imgFile);
+      }
+    });
+  }
+
   /* ── Page auto‑init: detects which page and wires up add buttons ── */
   function pageInit() {
-    if (document.querySelector('.gallery-grid')) initGalleryUpload('.gallery-grid');
+    // Gallery (button is in HTML)
+    const galleryBtn = document.getElementById('galleryAddBtn');
+    if (galleryBtn) {
+      galleryBtn.addEventListener('click', function () {
+        openGalleryAddModal();
+      });
+    }
     if (document.querySelector('.extra-grid')) initExtraCardAdder('.extra-grid');
     if (document.querySelector('.prog-grid'))
       initSectionCardAdder('.prog-grid', [
