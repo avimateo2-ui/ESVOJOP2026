@@ -83,16 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ── Contact Form ── */
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      showToast('¡Mensaje enviado con éxito! Te contactaremos pronto.');
-      contactForm.reset();
-    });
-  }
-
   /* ── Add to Cart Toast ── */
   document.querySelectorAll('.add-to-cart').forEach((btn) => {
     btn.addEventListener('click', () => {

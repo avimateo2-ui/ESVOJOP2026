@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-ancestors 'none'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; frame-ancestors 'none'; form-action 'self' https://formsubmit.co">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 </head>
 <body>
@@ -45,30 +45,30 @@
     <div class="container">
       <div class="contact-grid">
         <div class="reveal">
-          <form class="contact-form" id="contactForm" action="#" method="POST">
+          <form class="contact-form" action="https://formsubmit.co/jorpeflo@gmail.com" method="POST">
             <div class="form-row">
               <div class="form-group">
                 <label for="nombre">Nombre completo</label>
-                <input type="text" id="nombre" placeholder="Tu nombre" required>
+                <input type="text" name="name" id="nombre" placeholder="Tu nombre" required>
               </div>
               <div class="form-group">
                 <label for="edad">Edad</label>
-                <input type="number" id="edad" placeholder="Tu edad" min="5" max="99">
+                <input type="number" name="age" id="edad" placeholder="Tu edad" min="5" max="99">
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="email">Correo electrónico</label>
-                <input type="email" id="email" placeholder="tu@correo.com" required>
+                <input type="email" name="email" id="email" placeholder="tu@correo.com" required>
               </div>
               <div class="form-group">
                 <label for="telefono">Teléfono</label>
-                <input type="tel" id="telefono" placeholder="300 000 0000">
+                <input type="tel" name="phone" id="telefono" placeholder="300 000 0000">
               </div>
             </div>
             <div class="form-group">
               <label for="asunto">Asunto</label>
-              <select id="asunto">
+              <select name="subject" id="asunto">
                 <option value="">Selecciona un asunto</option>
                 <option value="inscripcion">Inscripción al club</option>
                 <option value="informacion">Información general</option>
@@ -79,7 +79,7 @@
             </div>
             <div class="form-group">
               <label for="mensaje">Mensaje</label>
-              <textarea id="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+              <textarea name="message" id="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
             </div>
             <button type="submit" class="btn btn-secondary">Enviar Mensaje</button>
           </form>
