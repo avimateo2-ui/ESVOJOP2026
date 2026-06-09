@@ -1696,6 +1696,83 @@ footer .social a:hover {
   .steps-grid { grid-template-columns: 1fr; }
 }
 
+/* ═══════════════════════════════════════════
+   ADD CONTENT
+   ═══════════════════════════════════════════ */
+.add-content-btn {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--yellow);
+  color: var(--yellow);
+  font-size: 1.8rem; line-height: 1;
+  cursor: pointer; z-index: 5;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(255,215,0,0.1);
+}
+.add-content-btn:hover {
+  background: var(--yellow);
+  color: var(--bg);
+  box-shadow: 0 0 35px rgba(255,215,0,0.3);
+  transform: scale(1.1);
+}
+.add-content-btn span { margin-top: -2px; }
+
+/* ── Add Content Modal ── */
+.ac-modal {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(6,13,26,0.85);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.ac-modal-box {
+  background: var(--surface);
+  border: 2px solid var(--yellow);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  max-width: 480px; width: 100%;
+  position: relative;
+  box-shadow: 0 0 60px rgba(255,215,0,0.1);
+}
+.ac-modal-close {
+  position: absolute; top: 0.5rem; right: 1rem;
+  background: none; border: none;
+  font-size: 2rem; color: var(--gray); cursor: pointer;
+  transition: color 0.3s;
+}
+.ac-modal-close:hover { color: var(--yellow); }
+.ac-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem; margin: 0 0 1.5rem;
+  background: linear-gradient(135deg, var(--white), var(--yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.ac-form { display: flex; flex-direction: column; gap: 1rem; }
+.ac-form label {
+  display: flex; flex-direction: column; gap: 0.3rem;
+  font-size: 0.85rem; color: var(--gray-light);
+}
+.ac-form input,
+.ac-form textarea {
+  background: var(--bg);
+  border: 1px solid rgba(255,215,0,0.2);
+  border-radius: 4px;
+  padding: 0.6rem 0.8rem;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+}
+.ac-form input:focus,
+.ac-form textarea:focus {
+  outline: none; border-color: var(--yellow);
+}
+.ac-form textarea { resize: vertical; min-height: 80px; }
+.ac-form .btn { align-self: flex-start; }
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }

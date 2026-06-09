@@ -122,39 +122,45 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'ArrowRight' && typeof changeImage === 'function') changeImage(1);
     });
 
-    /* ── Lightbox (Gallery) ── */
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    if (galleryItems.length) {
-      const galleryImgs = Array.from(galleryItems).map(item => item.querySelector('img')?.src).filter(Boolean);
-      let currentIdx = 0;
+    /* ── Lightbox (Gallery) — supports dynamic items ── */
+    const galleryGrid = document.querySelector('.gallery-grid');
+    let currentIdx = 0;
 
-      window.changeImage = function(dir) {
-        currentIdx = (currentIdx + dir + galleryImgs.length) % galleryImgs.length;
-        lbImg.src = galleryImgs[currentIdx];
-      };
+    window.changeImage = function(dir) {
+      const imgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i => i.src);
+      if (!imgs.length) return;
+      currentIdx = (currentIdx + dir + imgs.length) % imgs.length;
+      lbImg.src = imgs[currentIdx];
+    };
 
-      function openLightbox(idx) {
-        currentIdx = idx;
-        lbImg.src = galleryImgs[currentIdx];
-        lbImg.alt = galleryItems[currentIdx].querySelector('img')?.alt || '';
-        lightbox.classList.add('open');
-      }
-
-      galleryItems.forEach((item, i) => {
-        item.addEventListener('click', () => openLightbox(i));
-      });
-
-      document.getElementById('lbPrev')?.addEventListener('click', () => changeImage(-1));
-      document.getElementById('lbNext')?.addEventListener('click', () => changeImage(1));
+    function openLightbox(idx) {
+      const items = document.querySelectorAll('.gallery-item');
+      if (!items.length) return;
+      currentIdx = idx;
+      const img = items[idx].querySelector('img');
+      lbImg.src = img?.src || '';
+      lbImg.alt = img?.alt || '';
+      lightbox.classList.add('open');
     }
 
-    /* ── Lightbox (Extra Cards) ── */
-    document.querySelectorAll('.extra-card[data-img]').forEach(card => {
-      card.addEventListener('click', () => {
-        lbImg.src = card.dataset.img;
-        lbImg.alt = card.querySelector('img')?.alt || '';
-        lightbox.classList.add('open');
-      });
+    galleryGrid?.addEventListener('click', function(e) {
+      const item = e.target.closest('.gallery-item');
+      if (!item) return;
+      const items = Array.from(this.querySelectorAll('.gallery-item'));
+      const idx = items.indexOf(item);
+      if (idx !== -1) openLightbox(idx);
+    });
+
+    document.getElementById('lbPrev')?.addEventListener('click', () => changeImage(-1));
+    document.getElementById('lbNext')?.addEventListener('click', () => changeImage(1));
+
+    /* ── Lightbox (Extra Cards) — supports dynamic items ── */
+    document.querySelector('.extra-grid')?.addEventListener('click', function(e) {
+      const card = e.target.closest('.extra-card[data-img]');
+      if (!card) return;
+      lbImg.src = card.dataset.img;
+      lbImg.alt = card.querySelector('img')?.alt || '';
+      lightbox.classList.add('open');
     });
   }
 });
